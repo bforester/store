@@ -1,3 +1,7 @@
+using Microsoft.AspNetCore.Builder;
+using store;
+using Store.Memory;
+
 namespace Store.Web
 {
     public class Program
@@ -8,6 +12,7 @@ namespace Store.Web
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddScoped<IBookRepository, BookRepository>();
 
             var app = builder.Build();
 
@@ -18,11 +23,13 @@ namespace Store.Web
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
+            
 
             app.UseAuthorization();
 
@@ -32,5 +39,6 @@ namespace Store.Web
 
             app.Run();
         }
+
     }
 }
